@@ -1,7 +1,4 @@
 //TODO: Display Combat.
-
-import java.util.concurrent.TimeUnit;
-
 class Combat{
   
   private Unit unit1;
@@ -54,23 +51,12 @@ class Combat{
   
   public Unit DoCombat(){
     Unit winner = this.unit1;
-    this.CombatThread.start();
+    CombatThread();
     return winner;
   }
   
-  Thread CombatThread = new Thread() {
-      /*public void run() {
-          try {
-              System.out.println("Does it work?");
-  
-              Thread.sleep(1000);
-  
-              System.out.println("Nope, it doesnt...again.");
-          } catch(InterruptedException v) {
-              System.out.println(v);
-          }
-      }*/
-      public void run(){
+/*   Thread CombatThread = new Thread() {
+     public void run(){
           synchronized (CombatThread) {
           double unit1AttackTimer = 3;
           double unit2AttackTimer = 3;
@@ -111,7 +97,34 @@ class Combat{
             }
         }
      }
-  };
+  }; */
+  
+  public void CombatThread(){
+          double unit1AttackTimer = 3;
+          double unit2AttackTimer = 3;
+          while(unit1CurrentHealth > 0 && unit2CurrentHealth > 0){
+      
+            if(unit1AttackTimer <= 0){
+              Attack(unit1,unit2);
+              unit1AttackTimer = 1/unit1.GetAttackSpeed();
+              }
+              if(unit2AttackTimer<= 0){
+                Attack(unit2,unit1);
+                unit2AttackTimer = 1/unit2.GetAttackSpeed();
+              }
+              
+              unit1AttackTimer-=0.1;
+              unit2AttackTimer-=0.1;
+              println(unit1.name+"'s Health is: "+unit1CurrentHealth);
+              println(unit2.name+"'s Health is: "+unit2CurrentHealth);
+            }
+            if(unit1CurrentHealth <= 0){
+              winner = unit2;
+            }else if (unit2CurrentHealth <= 0){
+              winner = unit1;
+            }
+        }
+        
 public void Display(){
     
     textSize(52);
@@ -144,9 +157,9 @@ public void Display(){
   
   public void Resume(){
     this.isPaused = false;
-    synchronized (CombatThread) {
+    /*synchronized (CombatThread) {
       CombatThread.notify();
-    }
+    }*/
   }
   
   public void SetPos(int x, int y){

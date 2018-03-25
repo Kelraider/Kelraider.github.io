@@ -11,8 +11,17 @@ class Unit{
   private double attackSpeed;
   
   Unit(){
+    
+    PImage temp;
+    try{
+      temp = loadImage("Portraits/PortraitTest1.png");
+    }catch (Exception e){
+     temp = null;
+    }
+    
     this.name = "Base";
-    this.portrait = loadImage("Portraits/PortraitTest1.png");
+    this.portrait = temp;
+    
     this.health = 1;
     this.attack = 1;
     this.defence = 1;
