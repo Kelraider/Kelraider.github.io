@@ -8,8 +8,8 @@ class Button {
   private boolean hidden = false;
   private boolean enabled = true;
   
-  private int stroke;
-  private color fill;
+  private int butStroke;
+  private color butFill;
   
   private boolean isHovered = false;
   private color hoverFill;
@@ -21,8 +21,8 @@ class Button {
     this.sizeH = sizeH;
     
     this.alignment = "LEFT";
-    this.stroke = 10;
-    this.fill = color(0,0,0);
+    this.butStroke = 10;
+    this.butFill = color(0,0,0);
     this.hoverFill = color(20,20,20);
   }
   
@@ -31,17 +31,17 @@ class Button {
     this.posY = posY;
     this.sizeW = sizeW;
     this.sizeH = sizeH;
-    this.stroke = stroke;
-    this.fill = fill;
+    this.butStroke = stroke;
+    this.butFill = fill;
   }
   
   void Display(){
-    stroke(stroke);
+    stroke(butStroke);
     if(this.isHovered){
       fill(hoverFill);
       cursor(HAND);
     }else{
-      fill(fill);
+      fill(butFill);
       cursor(ARROW);
     }
     if (!this.hidden){

@@ -4,17 +4,17 @@ class Unit{
   public String name;
   public PImage portrait;
   
-  private double health;
-  private double attack;
-  private double defence;
+  private float health;
+  private float attack;
+  private float defence;
   
-  private double attackSpeed;
+  private float attackSpeed;
   
   Unit(){
     
     PImage temp;
     try{
-      temp = loadImage("Portraits/PortraitTest1.png");
+      temp = loadImage("data/Portraits/PortraitTest1.png");
     }catch (Exception e){
      temp = null;
     }
@@ -29,26 +29,33 @@ class Unit{
   }
   
   Unit(String name, String imgPath, 
-  double health, double attack, double defence, double attackSpeed){
+  float health, float attack, float defence, float attackSpeed){
+    
+    PImage temp;
+    try{
+      temp = loadImage(imgPath);
+    }catch (Exception e){
+     temp = null;
+    }
     
     this.name = name;
-    this.portrait = loadImage(imgPath);
+    this.portrait = temp;
     this.health = health;
     this.attack = attack;
     this.defence = defence;
     this.attackSpeed = attackSpeed;
   }
   
-  double GetHealth(){
+  float GetHealth(){
     return this.health;
   }
-  double GetAttack(){
+  float GetAttack(){
     return this.attack;
   }
-  double GetDefence(){
+  float GetDefence(){
     return this.defence;
   }
-  double GetAttackSpeed(){
+  float GetAttackSpeed(){
     return this.attackSpeed;
   }
 }

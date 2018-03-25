@@ -7,12 +7,12 @@ class Combat{
   private int posX = width/2;
   private int posY = height/2;
   
-  private double unit1CurrentHealth;
-  private double unit1CurrentAttack;
-  private double unit1CurrentDefence;
-  private double unit2CurrentHealth;
-  private double unit2CurrentAttack;
-  private double unit2CurrentDefence;
+  private float unit1CurrentHealth;
+  private float unit1CurrentAttack;
+  private float unit1CurrentDefence;
+  private float unit2CurrentHealth;
+  private float unit2CurrentAttack;
+  private float unit2CurrentDefence;
   
   private boolean isPaused = false;
   private Unit winner = null;
@@ -30,8 +30,8 @@ class Combat{
     this.unit2CurrentDefence = unit2.GetDefence();
   }
   
-  double CalcDmg(Unit source, Unit target){
-    double dmgDealt = 0.0;
+  float CalcDmg(Unit source, Unit target){
+    float dmgDealt = 0.0;
     dmgDealt = source.GetAttack()-target.GetDefence();
     if (dmgDealt < 0.0){
       dmgDealt = 0.0;
@@ -58,8 +58,8 @@ class Combat{
 /*   Thread CombatThread = new Thread() {
      public void run(){
           synchronized (CombatThread) {
-          double unit1AttackTimer = 3;
-          double unit2AttackTimer = 3;
+          float unit1AttackTimer = 3;
+          float unit2AttackTimer = 3;
           while(unit1CurrentHealth > 0 && unit2CurrentHealth > 0){
             
             if (IsPaused()) {
@@ -100,8 +100,8 @@ class Combat{
   }; */
   
   public void CombatThread(){
-          double unit1AttackTimer = 3;
-          double unit2AttackTimer = 3;
+          float unit1AttackTimer = 3;
+          float unit2AttackTimer = 3;
           while(unit1CurrentHealth > 0 && unit2CurrentHealth > 0){
       
             if(unit1AttackTimer <= 0){
@@ -131,7 +131,7 @@ public void Display(){
     image(unit1.portrait, posX, posY+50, 100, 100);
     text(unit1.name, posX, posY);
     if (unit1CurrentHealth > 0){
-      text(String.valueOf(unit1CurrentHealth), posX, posY+100);
+      text(unit1CurrentHealth, posX, posY+100);
     }else{
       text("Dead", posX, posY+100);
     }
@@ -140,7 +140,7 @@ public void Display(){
     image(unit2.portrait, posX+300, posY+50, 100, 100);
     text(unit2.name, posX+300, posY);
     if (unit2CurrentHealth > 0){
-      text(String.valueOf(unit2CurrentHealth), posX+300, posY+100);
+      text((int)unit2CurrentHealth, posX+300, posY+100);
     }else{
       text("Dead", posX+0, posY+100);
     }

@@ -14,8 +14,8 @@ void setup() {
   clickMe = new Button(200,500,100,100);
   clickMeToo = new Button(400,500,100,100);
   
-  myUnit1 = new Unit("U1","Portraits/PortraitTest1.png",10,5,4,1);
-  myUnit2 = new Unit("U2","Portraits/PortraitTest2.png",8,7,4,0.5);
+  myUnit1 = new Unit("U1","data/Portraits/PortraitTest1.png",10.1,5,4,1);
+  myUnit2 = new Unit("U2","data/Portraits/PortraitTest2.png",8.6,7,4,0.5);
   
   currentCombat = new Combat(myUnit1, myUnit2);
   anotherCurrentCombat = new Combat(myUnit1, myUnit2);
