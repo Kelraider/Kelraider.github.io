@@ -48,7 +48,7 @@ Button.prototype.display = function(){
     }
 }
 
-var OverButton = function(but){
+var overButton = function(but){
   var buttonX = but.pos.x;
   var buttonY = but.pos.y;
   var buttonWidth = but.sizeW;
@@ -63,7 +63,7 @@ var OverButton = function(but){
 }
 
 function butOnHover(but){
-  if (OverButton(but)){
+  if (overButton(but)){
     but.isHovered = true;
   }else{
     but.isHovered = false;
@@ -72,7 +72,7 @@ function butOnHover(but){
 
 function butOnClick(but){
   if(!but.disabled & !but.ishidden){
-    return OverButton(but);
+    return overButton(but);
   }else{
     return false;
   }

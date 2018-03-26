@@ -35,12 +35,12 @@ function setup() {
   console.log(firstUnit.getMaxHP());
   console.log(player.getMaxHP());
   
-  mapGlobal = new Map("assets/mapTest.png")
+  mapGlobal = new Map("assets/mapTest.png",width-mapW-borderPadding,borderPadding,mapW,mapH,bgCol,borderPadding)
 }
 
 function draw() {
-  background(bgCol);
   //Draw Three Main Boxes
+  mapGlobal.display();
   strokeWeight(2);
   stroke(0);
   fill(255);
@@ -50,19 +50,17 @@ function draw() {
   rect(width-mapW-borderPadding,mapH+(borderPadding*2),mapW,height-mapH-(borderPadding*3));
   //Map Border
   rect();
-  mapGlobal.display(width-mapW-borderPadding,borderPadding,mapW,mapH);
   
   
   mouseOver();
+  
   strokeWeight(1);
 
   //Insert State Wrapper
   firstButton.display();
   secondButton.display();
   firstTextBox.display();
-  
-  
-  
+
 }
 
 function mousePressed() {
@@ -75,7 +73,20 @@ function mousePressed() {
     //do something
     console.log("Hello!");
   }
+  
+  if(overMap(mapGlobal)){
+    mapGlobal.pastMouseX = mouseX;
+    mapGlobal.pastMouseY = mouseY;
+  }
+  
+  
   return false;
+}
+
+function mouseDragged(){
+  if(overMap(mapGlobal)){
+    mapGlobal.update()
+  }
 }
 
 function mouseOver() {
