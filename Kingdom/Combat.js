@@ -1,3 +1,3 @@
-function Combat(player, unit2, unit3, unit4){
+function Combat(party, enemy){
   
 }

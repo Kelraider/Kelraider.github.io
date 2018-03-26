@@ -29,10 +29,12 @@ Button.prototype.setText = function(txt){
 Button.prototype.display = function(){
   if(!this.isHidden){
       if(this.isHovered){
+        cursor(HAND);
         fill(this.hoveredColor)
         stroke(this.hoveredStroke);
       }else{
         fill(this.normalColor)
+        stroke(this.normalStroke);
       }
       //Shape
       rect(this.pos.x,this.pos.y,this.sizeW,this.sizeH);
@@ -42,7 +44,7 @@ Button.prototype.display = function(){
       fill(0);
       noStroke();
       text(this.innerText, 
-      this.pos.x, this.pos.y+(this.sizeH/2)-(this.textSize/2), this.sizeW, this.sizeH);
+      this.pos.x+3, this.pos.y+(this.sizeH/2)-(this.textSize/2), this.sizeW, this.sizeH);
     }
 }
 
@@ -69,7 +71,7 @@ function butOnHover(but){
 }
 
 function butOnClick(but){
-  if(!but.disabled){
+  if(!but.disabled & !but.ishidden){
     return OverButton(but);
   }else{
     return false;

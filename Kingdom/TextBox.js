@@ -20,10 +20,11 @@ function TextBox(x, y, w, h) {
     //CHANGE ME
     if(!this.isHidden){
       if(this.isHovered){
-        fill(this.hoveredColor)
+        fill(this.hoveredColor);
         stroke(this.hoveredStroke);
       }else{
-        fill(this.normalColor)
+        fill(this.normalColor);
+        stroke(this.normalStroke);
       }
       //Shape
       rect(this.pos.x,this.pos.y,this.sizeW,this.sizeH);

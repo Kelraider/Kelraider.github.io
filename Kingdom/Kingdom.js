@@ -1,26 +1,68 @@
+var bgCol;
+var mapW;
+var mapH;
+
+var borderPadding;
+
 var firstButton;
 var secondButton;
 var firstTextBox;
 
+var firstUnit;
+var player;
+
+var mapGlobal;
+
 function setup() {
   //TODO Auto Re-size
+  
+  borderPadding = 8;
+  
   createCanvas(window.innerWidth, window.innerHeight);
-  background(100, 100, 100);
+  bgCol = color(230, 230, 230)
+  background(bgCol);
+  
+  mapH = height/2;
+  mapW = width/3;
 
   setupTextBoxes();
   setupButtons();
   secondButton.pos = createVector(firstButton.pos.x+firstButton.sizeW+30, firstButton.pos.y);
   firstTextBox.sizeW = firstButton.sizeW + secondButton.sizeW + 30;
+  
+  firstUnit = new Unit("Dany");
+  player = new Player("Fred");
+  console.log(firstUnit.getMaxHP());
+  console.log(player.getMaxHP());
+  
+  mapGlobal = new Map("assets/mapTest.png")
 }
 
 function draw() {
-  background(100, 100, 100);
+  background(bgCol);
+  //Draw Three Main Boxes
+  strokeWeight(2);
+  stroke(0);
+  fill(255);
+  //Left Rect
+  rect(borderPadding,borderPadding,width-mapW-(borderPadding*3),height-(borderPadding*2));
+  //Bottom Right Rect
+  rect(width-mapW-borderPadding,mapH+(borderPadding*2),mapW,height-mapH-(borderPadding*3));
+  //Map Border
+  rect();
+  mapGlobal.display(width-mapW-borderPadding,borderPadding,mapW,mapH);
+  
+  
   mouseOver();
+  strokeWeight(1);
 
   //Insert State Wrapper
   firstButton.display();
   secondButton.display();
   firstTextBox.display();
+  
+  
+  
 }
 
 function mousePressed() {
@@ -37,6 +79,7 @@ function mousePressed() {
 }
 
 function mouseOver() {
+  cursor(ARROW);
   butOnHover(firstButton);
   butOnHover(secondButton);
   //Add butOnHover(button) here to add hover effect.
