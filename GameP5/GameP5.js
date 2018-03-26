@@ -4,9 +4,17 @@ var bug3;
 var bug4;
 var bug5;
 var bug6;
+
+var bgCol;
+var cirCol;
+var cirStroke;
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  // Create object
+  frameRate(60);
+  bgCol = color(random(0,245),random(0,245),random(0,245));
+  cirCol = color(red(bgCol)+10,green(bgCol)+10,blue(bgCol)+10)
+  cirStroke = color(red(bgCol)+5,green(bgCol)+5,blue(bgCol)+5)
+  //Create "bugs"
   bug = new Jitter;
   bug2 = new Jitter;
   bug3 = new Jitter;
@@ -16,9 +24,9 @@ function setup() {
 }
 
 function draw() {
-  background(16, 177, 218);
-  fill(26,187,228);
-  stroke(21,182,223);
+  background(bgCol);
+  fill(cirCol);
+  stroke(cirStroke);
   ellipse(width/2, height/2, height, height);
   bug.move();
   bug.display();

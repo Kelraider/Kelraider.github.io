@@ -51,8 +51,7 @@ function Jitter() {
      this.x < this.targetX+20 && 
      this.y > this.targetY-20 &&
      this.y < this.targetY+20){
-      targetVector = this.randomPointInCircle(height/2);
-      console.log(targetVector.x,targetVector.y);
+      targetVector = this.randomPointInCircle(height/2-50);
       this.targetX = targetVector.x;
       this.targetY = targetVector.y;
     }
