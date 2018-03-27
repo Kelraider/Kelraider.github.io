@@ -48,6 +48,32 @@ Button.prototype.display = function(){
     }
 }
 
+Button.prototype.displayLoc = function(x,y,w,h){
+  this.pos.x = x;
+  this.pos.y = y;
+  this.sizeW = w;
+  this.sizeH = h;
+  if(!this.isHidden){
+      if(this.isHovered){
+        cursor(HAND);
+        fill(this.hoveredColor)
+        stroke(this.hoveredStroke);
+      }else{
+        fill(this.normalColor)
+        stroke(this.normalStroke);
+      }
+      //Shape
+      rect(this.pos.x,this.pos.y,this.sizeW,this.sizeH);
+      //Text
+      textAlign(CENTER);
+      textSize(this.textSize);
+      fill(0);
+      noStroke();
+      text(this.innerText, 
+      this.pos.x+3, this.pos.y+(this.sizeH/2)-(this.textSize/2), this.sizeW, this.sizeH);
+    }
+}
+
 var overButton = function(but){
   var buttonX = but.pos.x;
   var buttonY = but.pos.y;
