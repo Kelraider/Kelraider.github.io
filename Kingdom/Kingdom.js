@@ -5,11 +5,20 @@ var mapH;
 var borderPadding;
 
 //UI Elements
+//Containers
+var mainContainer;
+var partyContainer;
+
+//Buttons
 var firstButton;
 var secondButton;
 var firstTextBox;
   //Maps
+    //Preload Images
+var mapGlobalImg;
 var mapGlobal;
+
+
   //Areas
 var area1;
 var area2;
@@ -19,7 +28,12 @@ var area3;
 var firstUnit;
 var player;
 
+//Parties
+var party1;
 
+function preload(){
+  mapGlobalImg = loadImage("assets/mapTest.png");
+}
 
 function setup() {
   //TODO Auto Re-size
@@ -32,41 +46,43 @@ function setup() {
   background(bgCol);
   
   //Define mapH and mapW;
-  mapH = height/2;
   mapW = width/3;
+  mapH = height/2;
+  
+  //Setup Containers
+  mainContainer = new Container(borderPadding, borderPadding, width-mapW-(borderPadding*3), height-(borderPadding*2));
+  partyContainer = new PartyContainer(width-mapW-borderPadding,mapH+(borderPadding*2),mapW,height-mapH-(borderPadding*3));
   
   //Setup UI elements
   setupTextBoxes();
   setupButtons();
-  secondButton.pos = createVector(firstButton.pos.x+firstButton.sizeW+30, firstButton.pos.y);
   firstTextBox.sizeW = firstButton.sizeW + secondButton.sizeW + 30;
   
   //Unit and Player Creation
   firstUnit = new Unit("Dany");
   player = new Player("Fred");
   
+  //Party Creation
+  party1 = new Party(player, firstUnit, null);
+  partyContainer.party = party1;
+  
   //Setup Map and Areas
-  mapGlobal = new Map("assets/mapTestLarge.png",width-mapW-borderPadding,borderPadding,mapW,mapH,bgCol,borderPadding)
+  mapGlobal = new Map(mapGlobalImg,width-mapW-borderPadding,borderPadding,mapW,mapH,bgCol,borderPadding);
   setupAreas(mapGlobal);
+  
+  
 }
 
 function draw() {
+  mouseOver();
   //Draw Three Main Boxes
   mapGlobal.display();
+
+  //Container Display
+  mainContainer.display();
   
-  
-  strokeWeight(2);
-  stroke(0);
-  fill(255);
-  //Left Rect
-  rect(borderPadding,borderPadding,width-mapW-(borderPadding*3),height-(borderPadding*2));
-  //Bottom Right Rect
-  rect(width-mapW-borderPadding,mapH+(borderPadding*2),mapW,height-mapH-(borderPadding*3));
-  //Map Border
-  rect();
-  
-  
-  mouseOver();
+  //Party Display
+  partyContainer.display();
   
   strokeWeight(1);
 
@@ -88,6 +104,12 @@ function mousePressed() {
     console.log("Hello!");
   }
   
+  //Map Code, Insert State Wrapper Here too maybe
+  if (butOnClick(area1.icon)) {
+    //do something
+    console.log("Working!");
+  }
+  
   if(overMap(mapGlobal)){
     mapGlobal.pastMouseX = mouseX;
     mapGlobal.pastMouseY = mouseY;
@@ -103,6 +125,21 @@ function mouseDragged(){
   }
 }
 
+function windowResized(){
+  resizeCanvas(window.innerWidth, window.innerHeight);
+
+  //Map Resize
+  mapW = width/3;
+  mapH = height/2;
+  mapGlobal.reSize(width-mapW-borderPadding, borderPadding, mapW, mapH);
+  
+  //Container Resize
+  mainContainer.reSize(borderPadding, borderPadding, width-mapW-(borderPadding*3), height-(borderPadding*2));
+  partyContainer.reSize(width-mapW-borderPadding,mapH+(borderPadding*2),mapW,height-mapH-(borderPadding*3));
+  
+  //Button Resize
+}
+
 function mouseOver() {
   cursor(ARROW);
   butOnHover(firstButton);
@@ -113,11 +150,19 @@ function mouseOver() {
 }
 
 function setupButtons() {
+  
+  //MainContainer Buttons
   firstButton = new Button(200, 200, 0, 30);
   firstButton.setText("I'm not ready for that yet.");
-
+  
   secondButton = new Button(0, 0, 0, 30);
+  secondButton.pos = createVector(firstButton.pos.x+firstButton.sizeW+30, firstButton.pos.y);
   secondButton.setText("OK.");
+  
+  mainContainer.add(firstButton);
+  mainContainer.add(secondButton);
+  
+  //PartyContainer Buttons
 }
 
 function setupTextBoxes() {

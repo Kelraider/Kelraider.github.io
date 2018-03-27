@@ -18,6 +18,33 @@ function Button(x, y, w, h) {
   
 }
 
+Button.prototype.getX = function(){
+  return this.pos.x;
+}
+Button.prototype.getY = function(){
+  return this.pos.y;
+}
+Button.prototype.getW = function(){
+  return this.sizeW;
+}
+Button.prototype.getH = function(){
+  return this.sizeH;
+}
+
+Button.prototype.setX = function(x){
+  this.pos.x = x;
+}
+Button.prototype.setY = function(y){
+  this.pos.y = y;
+}
+Button.prototype.setW = function(w){
+  this.sizeW = w;
+}
+Button.prototype.setH = function(h){
+  this.sizeH = h;
+}
+
+
 Button.prototype.setText = function(txt){
   textSize(this.textSize);
     if(textWidth(txt) > this.sizeW){
@@ -29,6 +56,7 @@ Button.prototype.setText = function(txt){
 Button.prototype.display = function(){
   if(!this.isHidden){
       if(this.isHovered){
+        butCheckHover(this);
         cursor(HAND);
         fill(this.hoveredColor)
         stroke(this.hoveredStroke);
@@ -53,28 +81,17 @@ Button.prototype.displayLoc = function(x,y,w,h){
   this.pos.y = y;
   this.sizeW = w;
   this.sizeH = h;
-  if(!this.isHidden){
-      if(this.isHovered){
-        cursor(HAND);
-        fill(this.hoveredColor)
-        stroke(this.hoveredStroke);
-      }else{
-        fill(this.normalColor)
-        stroke(this.normalStroke);
-      }
-      //Shape
-      rect(this.pos.x,this.pos.y,this.sizeW,this.sizeH);
-      //Text
-      textAlign(CENTER);
-      textSize(this.textSize);
-      fill(0);
-      noStroke();
-      text(this.innerText, 
-      this.pos.x+3, this.pos.y+(this.sizeH/2)-(this.textSize/2), this.sizeW, this.sizeH);
-    }
+  
+  this.display();
 }
 
-var overButton = function(but){
+function butCheckHover(but){
+  if(!overButton(but)){
+    but.isHovered = false;
+  }
+}
+
+function overButton(but){
   var buttonX = but.pos.x;
   var buttonY = but.pos.y;
   var buttonWidth = but.sizeW;
@@ -92,7 +109,7 @@ function butOnHover(but){
   if (overButton(but)){
     but.isHovered = true;
   }else{
-    but.isHovered = false;
+    //but.isHovered = false;
   }
 }
 

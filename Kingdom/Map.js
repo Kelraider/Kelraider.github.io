@@ -3,7 +3,7 @@ function Area(name, x, y) {
   this.pos = createVector(x, y);
   this.iconSize = 100;
   this.icon = new Button(x, y, this.iconSize, this.iconSize);
-  this.icon.normalColor = color(0, 255, 0);
+  this.icon.normalColor = color(0, 255, 0, 10);
 }
 
 Area.prototype.display = function(x, y, iconSize) {
@@ -27,8 +27,8 @@ Dungeon.prototype = Object.create(Area.prototype);
 Dungeon.prototype.constructor = Area;
 Dungeon.prototype.isDungeon = true;
 
-function Map(imgPath, x, y, w, h, bgCol, borderPadding) {
-  this.map = loadImage(imgPath);
+function Map(img, x, y, w, h, bgCol, borderPadding) {
+  this.map = img;
 
   this.x = x;
   this.y = y;
@@ -36,7 +36,7 @@ function Map(imgPath, x, y, w, h, bgCol, borderPadding) {
   this.h = h;
   this.bgCol = bgCol;
   this.bP = borderPadding;
-  this.mapStroke = 4;
+  this.mapStroke = 2;
 
   this.currentX = 0;
   this.currentY = 0;
@@ -44,14 +44,27 @@ function Map(imgPath, x, y, w, h, bgCol, borderPadding) {
   this.pastMouseX = null;
   this.pastMouseY = null;
   this.zoom = 1;
+  if(this.map.width < this.w || this.map.height < this.h){
+    this.scaleMode = true;
+    console.warn("Map has scaleMode enabled, this feature is not fully functioning yet.");
+  } else {
+    this.scaleMode = false;
+  }
 
 
   this.areas = [];
+  
+  
+  
 }
 
 Map.prototype.display = function() {
   rect(this.x, this.y, this.w, this.h);
-  image(this.map, this.x-this.currentX, this.y-this.currentY);
+  if(!this.scaleMode){
+    image(this.map, this.x-this.currentX, this.y-this.currentY);
+  }else{
+    image(this.map, this.x-this.currentX, this.y-this.currentY,this.w,this.h);
+  }
 
   //Areas Drawn
   for (i=0; i<this.areas.length; i++) {
@@ -73,7 +86,8 @@ Map.prototype.display = function() {
 }
 
 Map.prototype.update = function() {
-
+  
+  
   //console.log((this.currentY+this.pastMouseY-mouseY) <= (this.map.height-this.y))
   if (this.pastMouseX != null && this.pastMouseY != null) {
     if ((this.currentX+this.pastMouseX-mouseX) >= 0 && (this.currentX+this.pastMouseX-mouseX) <= (this.map.width-this.w)) {
@@ -88,6 +102,21 @@ Map.prototype.update = function() {
   this.pastMouseY = mouseY;
 
   //console.log(this.currentX,this.currentY);
+}
+
+Map.prototype.reSize = function(x,y,w,h){
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.h = h;
+  
+  //Out Of Bounds Check
+  if(this.currentX+this.w > this.map.width){
+    this.currentX = this.map.width-this.w;
+  }
+  if(this.currentY+this.h > this.map.height){
+    this.currentY = this.map.height-this.h;
+  }
 }
 
 function overMap(map) {
@@ -106,12 +135,14 @@ function overMap(map) {
 
 function mapOnHover(map) {
   if (overMap(map)) {
+    cursor(MOVE);
     for (i=0; i<map.areas.length; i++) {
-      if (overButton(map.areas[i].icon)) {
+      /*if (overButton(map.areas[i].icon)) {
         map.areas[i].icon.isHovered = true;
       } else {
-        map.areas[i].icon.isHovered = false;
-      }
+        //map.areas[i].icon.isHovered = false;
+      }!!*/
+      butOnHover(map.areas[i].icon)
     }
   }
 }
