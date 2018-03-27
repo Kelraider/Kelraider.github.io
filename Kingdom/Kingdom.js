@@ -26,7 +26,9 @@ var area3;
 
 //Units and Player
 var firstUnit;
+var secondUnit;
 var player;
+
 
 //Parties
 var party1;
@@ -60,10 +62,11 @@ function setup() {
   
   //Unit and Player Creation
   firstUnit = new Unit("Dany");
+  secondUnit = new Unit("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
   player = new Player("Fred");
   
   //Party Creation
-  party1 = new Party(player, firstUnit, null);
+  party1 = new Party(player, firstUnit, secondUnit);
   partyContainer.party = party1;
   
   //Setup Map and Areas
