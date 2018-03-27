@@ -1,3 +1,5 @@
+console.log("Test");
+
 //Canvas and Layout
 var bgCol;
 var mapW;
@@ -38,6 +40,7 @@ function preload(){
 }
 
 function setup() {
+  console.log("TestSetup");
   //TODO Auto Re-size
   
   borderPadding = 8;
@@ -54,7 +57,7 @@ function setup() {
   //Setup Containers
   mainContainer = new Container(borderPadding, borderPadding, width-mapW-(borderPadding*3), height-(borderPadding*2));
   partyContainer = new PartyContainer(width-mapW-borderPadding,mapH+(borderPadding*2),mapW,height-mapH-(borderPadding*3));
-  
+  console.log("Containers Setup");
   //Setup UI elements
   setupTextBoxes();
   setupButtons();
