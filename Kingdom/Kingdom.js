@@ -63,11 +63,14 @@ function setup() {
   //Unit and Player Creation
   firstUnit = new Unit("Dany");
   secondUnit = new Unit("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+  console.log("Made it here");
   player = new Player("Fred");
-  
+  console.log(firstUnit.name, secondUnit, player.isPlayer);
   //Party Creation
   party1 = new Party(player, firstUnit, secondUnit);
   partyContainer.party = party1;
+  console.log(party1);
+  console.log(party1.party);
   
   //Setup Map and Areas
   mapGlobal = new Map(mapGlobalImg,width-mapW-borderPadding,borderPadding,mapW,mapH,bgCol,borderPadding);
