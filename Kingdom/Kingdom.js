@@ -1,5 +1,3 @@
-console.log("Test");
-
 //Canvas and Layout
 var bgCol;
 var mapW;
@@ -10,6 +8,13 @@ var borderPadding;
 //Containers
 var mainContainer;
 var partyContainer;
+
+//Tabs
+var mainTab1;
+var mainTab2;
+var mainTab3;
+var mainTab4;
+var mainTab5;
 
 //Buttons
 var firstButton;
@@ -40,7 +45,6 @@ function preload(){
 }
 
 function setup() {
-  console.log("TestSetup");
   //TODO Auto Re-size
   
   borderPadding = 8;
@@ -57,7 +61,29 @@ function setup() {
   //Setup Containers
   mainContainer = new Container(borderPadding, borderPadding, width-mapW-(borderPadding*3), height-(borderPadding*2));
   partyContainer = new PartyContainer(width-mapW-borderPadding,mapH+(borderPadding*2),mapW,height-mapH-(borderPadding*3));
-  console.log("Containers Setup");
+  //Setup Container Tabs
+  mainTab1 = new Tab(mainContainer.x+1, mainContainer.y+1, mainContainer.w/5, mainContainer.h/20);
+  mainTab2 = new Tab(mainContainer.x+mainContainer.w/5, mainContainer.y+1, mainContainer.w/5, mainContainer.h/20);
+  mainTab3 = new Tab(mainContainer.x+mainContainer.w*2/5, mainContainer.y+1, mainContainer.w/5, mainContainer.h/20);
+  mainTab4 = new Tab(mainContainer.x+mainContainer.w*3/5, mainContainer.y+1, mainContainer.w/5, mainContainer.h/20);
+  mainTab5 = new Tab(mainContainer.x+mainContainer.w*4/5-2, mainContainer.y+1, mainContainer.w/5, mainContainer.h/20);
+  mainTab1.innerText = "Tab1";
+  mainTab2.innerText = "Tab2";
+  mainTab3.innerText = "Tab3";
+  mainTab4.innerText = "Tab4";
+  mainTab5.innerText = "Tab5";
+  
+  mainTab1.container = mainContainer;
+  mainTab2.container = mainContainer;
+  mainTab3.container = mainContainer;
+  mainTab4.container = mainContainer;
+  mainTab5.container = mainContainer;
+  mainContainer.tabs.push(mainTab1);
+  mainContainer.tabs.push(mainTab2);
+  mainContainer.tabs.push(mainTab3);
+  mainContainer.tabs.push(mainTab4);
+  mainContainer.tabs.push(mainTab5);
+  mainContainer.activeTab = mainContainer.tabs[0];
   //Setup UI elements
   setupTextBoxes();
   setupButtons();
@@ -66,14 +92,10 @@ function setup() {
   //Unit and Player Creation
   firstUnit = new Unit("Dany");
   secondUnit = new Unit("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-  console.log("Made it here");
   player = new Player("Fred");
-  console.log(firstUnit.name, secondUnit, player.isPlayer);
   //Party Creation
   party1 = new Party(player, firstUnit, secondUnit);
   partyContainer.party = party1;
-  console.log(party1);
-  console.log(party1.party);
   
   //Setup Map and Areas
   mapGlobal = new Map(mapGlobalImg,width-mapW-borderPadding,borderPadding,mapW,mapH,bgCol,borderPadding);
@@ -96,13 +118,36 @@ function draw() {
   strokeWeight(1);
 
   //Insert State Wrapper
-  firstButton.display();
-  secondButton.display();
-  firstTextBox.display();
-
+  //firstButton.display();
+  //secondButton.display();
+  //firstTextBox.display();
+  
 }
 
 function mousePressed() {
+  //Tabs
+  if (butOnClick(mainTab1)) {
+    //do something
+    mainTab1.onClick();
+  }
+  if (butOnClick(mainTab2)) {
+    //do something
+    mainTab2.onClick();
+  }
+  if (butOnClick(mainTab3)) {
+    //do something
+    mainTab3.onClick();
+  }
+  if (butOnClick(mainTab4)) {
+    //do something
+    mainTab4.onClick();
+  }
+  if (butOnClick(mainTab5)) {
+    //do something
+    mainTab5.onClick();
+  }
+  
+  
   //Insert State Wrapper to reduce cost
   if (butOnClick(firstButton)) {
     //do something
@@ -151,9 +196,19 @@ function windowResized(){
 
 function mouseOver() {
   cursor(ARROW);
+  //Tabs
+  butOnHover(mainTab1);
+  butOnHover(mainTab2);
+  butOnHover(mainTab3);
+  butOnHover(mainTab4);
+  butOnHover(mainTab5);
+  
+  
   butOnHover(firstButton);
   butOnHover(secondButton);
   //Add butOnHover(button) here to add hover effect.
+  
+  
   
   mapOnHover(mapGlobal);
 }
@@ -177,6 +232,8 @@ function setupButtons() {
 function setupTextBoxes() {
   firstTextBox = new TextBox(200, 100, 250, 80);
   firstTextBox.setText("Are you ready to begin your super epic adventure?");
+  
+  mainContainer.tabs[1].add(firstTextBox);
 }
 
 function setupAreas(map) {

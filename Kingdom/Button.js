@@ -54,6 +54,8 @@ Button.prototype.setText = function(txt){
 }
 
 Button.prototype.display = function(){
+  strokeWeight(1);
+  
   if(!this.isHidden){
       if(this.isHovered){
         butCheckHover(this);
@@ -120,4 +122,24 @@ function butOnClick(but){
     return false;
   }
 }
+
+function Tab(x, y, w, h){
+  Button.call(this, x, y, w, h);
+  
+  this.container = null;
+  this.objs = [];
+}
+
+Tab.prototype = Object.create(Button.prototype);
+Tab.prototype.constructor = Button;
+Tab.prototype.isTab = true;
+
+Tab.prototype.onClick = function(){
+  this.container.activeTab = this;
+}
+
+Tab.prototype.add = function(obj){
+  this.objs.push(obj);
+}
+
   

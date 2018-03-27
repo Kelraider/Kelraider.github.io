@@ -111,12 +111,26 @@ Map.prototype.reSize = function(x,y,w,h){
   this.h = h;
   
   //Out Of Bounds Check
-  if(this.currentX+this.w > this.map.width){
-    this.currentX = this.map.width-this.w;
+  
+  if(this.currentX < 0){
+    this.currentX = 0;
+  }
+  if(this.currentY < 0){
+    this.currentY = 0;
   }
   if(this.currentY+this.h > this.map.height){
     this.currentY = this.map.height-this.h;
   }
+  if(this.currentY+this.h > this.map.height){
+    this.currentY = this.map.height-this.h;
+  }
+  /*if(this.map.width < this.w || this.map.height < this.h){
+    this.scaleMode = true;
+    console.warn("Map has scaleMode enabled, this feature is not fully functioning yet.");
+  } else {
+    this.scaleMode = false;
+  }*/
+  
 }
 
 function overMap(map) {

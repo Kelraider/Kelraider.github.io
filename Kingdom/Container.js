@@ -5,13 +5,22 @@ function Container(x,y,w,h){
   this.h = h;
   
   this.tabs = [];
-  this.objs = [];
+  this.activeTab = null;
+  
   this.party = null;
   
 }
 
 Container.prototype.display = function(){
   this.displayBorder();
+  
+  //Display all Tabs
+  for(i=0;i<this.tabs.length;i++){
+    this.tabs[i].display();
+  }
+  
+  //Display Active Tab's Objects
+  this.displayActiveTab();
 }
 
 Container.prototype.displayBorder = function(){
@@ -22,7 +31,7 @@ Container.prototype.displayBorder = function(){
 }
 
 Container.prototype.add = function(obj){
-  this.objs.push(obj);
+  this.tabs[0].objs.push(obj);
 }
 
 Container.prototype.reSize = function(x,y,w,h){
@@ -32,8 +41,18 @@ Container.prototype.reSize = function(x,y,w,h){
   this.h = h;
 }
 
+Container.prototype.displayActiveTab = function(x,y,w,h){
+    for(i=0;i<this.activeTab.objs.length;i++){
+        this.activeTab.objs[i].display();
+    }
+  
+}
+
+
 function PartyContainer(x,y,w,h){
   Container.call(this,x,y,w,h);
+  
+  this.party = null;
 }
 
 PartyContainer.prototype = Object.create(Container.prototype);
@@ -48,6 +67,5 @@ PartyContainer.prototype.display = function(){
   }else{
     console.warn("Tried to display null party.");
   }
-  
-  
+   
 }

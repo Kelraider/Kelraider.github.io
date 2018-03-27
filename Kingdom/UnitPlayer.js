@@ -40,7 +40,7 @@ Unit.prototype.bondEnum = Object.freeze( {
 
 Unit.prototype.setBond = function(bondLevel) {
   if (this.bondEnum[bondLevel] == null) {
-    Console.log("Invalid bondLevel Attempted.");
+    console.warn("Invalid bondLevel Attempted.");
   } else {
     this.bond = this.bondEnum[bondLevel];
   }
@@ -52,11 +52,13 @@ Unit.prototype.getMaxHP = function() {
 
 Unit.prototype.display = function(x, y, w, h) {
   
+  strokeWeight(1);
   textAlign(LEFT);
   //Background
-  fill(0, 0, 255);
+  fill(255);
   rect(x, y, w, h);
   
+  stroke(0);
   //NAME
   //FULL SPACE = (x + w*11/64, y + h*1/32, w*39/64, h*8/32)
   fill(0);
@@ -77,7 +79,7 @@ Unit.prototype.display = function(x, y, w, h) {
   
   //LVL
   fill(255,255,0);
-  this.displayLVL(x + w*1/32, y + h*1/32, w*4/32, h*18/32);
+  this.displayLVL(x + w*1/32, y + h*1/32, w*4/32, h*17/32);
   
   //HP
   this.displayHP(x + w*11/64, y + h*10/32, w*51/64, h*7/32);
@@ -114,6 +116,7 @@ Unit.prototype.displayHP = function(x,y,w,h){
   fill(255);
   text("HP",x+5,y+h/2)
   
+  
   textAlign(LEFT);
   textSize(h);
   text((this.HP/this.MaxHP)*100+"%",x+w-textWidth((this.HP/this.MaxHP)*100+"%"),y,w*3/24,h);
@@ -147,7 +150,7 @@ Unit.prototype.displayLVL = function(x,y,w,h){
   textSize(h/4);
   fill(255);
   strokeWeight(2.5);
-  text("LVL",x+strokeWeight(),y+h/4);
+  text("LVL",x+2.5,y+h/4);
 }
 
 //Player Class
@@ -169,12 +172,12 @@ Party.prototype.display = function(x,y,w,h) {
   var ySpacing = h/3;
   
   if (this.unit1 != null) {
-    this.unit1.display(x,y,w,h/3);
+    this.unit1.display(x+1,y+1,w-2,h/3+2);
   }
   if (this.unit2 != null) {
-    this.unit2.display(x,y+ySpacing,w,h/3);
+    this.unit2.display(x+1,y+ySpacing,w-2,h/3);
   }
   if (this.unit3 != null) {
-    this.unit3.display(x,y+(ySpacing*2),w,h/3);
+    this.unit3.display(x+1,y+(ySpacing*2)-1,w-2,h/3-1);
   }
 }
