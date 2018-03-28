@@ -17,7 +17,7 @@ function Button(x, y, w, h) {
   this.disabledColor = color(220);
   
 }
-
+Button.prototype.isButton = true;
 Button.prototype.getX = function(){
   return this.pos.x;
 }
@@ -116,7 +116,7 @@ function butOnHover(but){
 }
 
 function butOnClick(but){
-  if(!but.disabled & !but.ishidden){
+  if(!but.disabled & !but.isHidden){
     return overButton(but);
   }else{
     return false;
@@ -135,11 +135,17 @@ Tab.prototype.constructor = Button;
 Tab.prototype.isTab = true;
 
 Tab.prototype.onClick = function(){
-  this.container.activeTab = this;
+  this.container.setActiveTab(this);
 }
 
 Tab.prototype.add = function(obj){
   this.objs.push(obj);
+}
+
+Tab.prototype.reSize = function(x,y,w,h){
+  this.pos = createVector(x,y);
+  this.sizeW = w;
+  this.sizeH = h;
 }
 
   

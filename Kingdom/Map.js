@@ -51,7 +51,6 @@ function Map(img, x, y, w, h, bgCol, borderPadding) {
     this.scaleMode = false;
   }
 
-
   this.areas = [];
   
   
@@ -86,7 +85,6 @@ Map.prototype.display = function() {
 }
 
 Map.prototype.update = function() {
-  
   
   //console.log((this.currentY+this.pastMouseY-mouseY) <= (this.map.height-this.y))
   if (this.pastMouseX != null && this.pastMouseY != null) {

@@ -54,8 +54,9 @@ Unit.prototype.display = function(x, y, w, h) {
   
   strokeWeight(1);
   textAlign(LEFT);
+  
   //Background
-  fill(255);
+  fill(230);
   rect(x, y, w, h);
   
   stroke(0);
@@ -101,7 +102,7 @@ Unit.prototype.displayHP = function(x,y,w,h){
   
   strokeWeight(3);
   fill(200,10,10);
-  //noFill();
+  
   rect(x,y,w,h);
   fill(10,230,10);
   rect(x,y,w,h);
@@ -172,12 +173,12 @@ Party.prototype.display = function(x,y,w,h) {
   var ySpacing = h/3;
   
   if (this.unit1 != null) {
-    this.unit1.display(x+1,y+1,w-2,h/3+2);
+    this.unit1.display(x+1,y+1,w-2,h/3-2);
   }
   if (this.unit2 != null) {
     this.unit2.display(x+1,y+ySpacing,w-2,h/3);
   }
   if (this.unit3 != null) {
-    this.unit3.display(x+1,y+(ySpacing*2)-1,w-2,h/3-1);
+    this.unit3.display(x+1,y+(ySpacing*2)+1,w-2,h/3-2);
   }
 }

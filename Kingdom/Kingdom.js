@@ -20,11 +20,11 @@ var mainTab5;
 var firstButton;
 var secondButton;
 var firstTextBox;
+  
   //Maps
     //Preload Images
 var mapGlobalImg;
 var mapGlobal;
-
 
   //Areas
 var area1;
@@ -84,6 +84,7 @@ function setup() {
   mainContainer.tabs.push(mainTab4);
   mainContainer.tabs.push(mainTab5);
   mainContainer.activeTab = mainContainer.tabs[0];
+  
   //Setup UI elements
   setupTextBoxes();
   setupButtons();
@@ -93,6 +94,7 @@ function setup() {
   firstUnit = new Unit("Dany");
   secondUnit = new Unit("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
   player = new Player("Fred");
+  
   //Party Creation
   party1 = new Party(player, firstUnit, secondUnit);
   partyContainer.party = party1;
@@ -101,27 +103,44 @@ function setup() {
   mapGlobal = new Map(mapGlobalImg,width-mapW-borderPadding,borderPadding,mapW,mapH,bgCol,borderPadding);
   setupAreas(mapGlobal);
   
-  
 }
 
 function draw() {
+  
   mouseOver();
   //Draw Three Main Boxes
+  //Map Display
   mapGlobal.display();
-
   //Container Display
   mainContainer.display();
-  
   //Party Display
   partyContainer.display();
   
   strokeWeight(1);
-
-  //Insert State Wrapper
-  //firstButton.display();
-  //secondButton.display();
-  //firstTextBox.display();
   
+}
+
+function windowResized(){
+  resizeCanvas(window.innerWidth, window.innerHeight);
+
+  //Map Resize
+  mapW = width/3;
+  mapH = height/2;
+  mapGlobal.reSize(width-mapW-borderPadding, borderPadding, mapW, mapH);
+  
+  //Container Resize
+  mainContainer.reSize(borderPadding, borderPadding, width-mapW-(borderPadding*3), height-(borderPadding*2));
+  partyContainer.reSize(width-mapW-borderPadding,mapH+(borderPadding*2),mapW,height-mapH-(borderPadding*3));
+  
+  //Tabs Resize
+  mainTab1.reSize(mainContainer.x+1, mainContainer.y+1, mainContainer.w/5, mainContainer.h/20);
+  mainTab2.reSize(mainContainer.x+mainContainer.w/5, mainContainer.y+1, mainContainer.w/5, mainContainer.h/20);
+  mainTab3.reSize(mainContainer.x+mainContainer.w*2/5, mainContainer.y+1, mainContainer.w/5, mainContainer.h/20);
+  mainTab4.reSize(mainContainer.x+mainContainer.w*3/5, mainContainer.y+1, mainContainer.w/5, mainContainer.h/20);
+  mainTab5.reSize(mainContainer.x+mainContainer.w*4/5-2, mainContainer.y+1, mainContainer.w/5, mainContainer.h/20);
+  
+  //Button Resize
+
 }
 
 function mousePressed() {
@@ -179,21 +198,6 @@ function mouseDragged(){
   }
 }
 
-function windowResized(){
-  resizeCanvas(window.innerWidth, window.innerHeight);
-
-  //Map Resize
-  mapW = width/3;
-  mapH = height/2;
-  mapGlobal.reSize(width-mapW-borderPadding, borderPadding, mapW, mapH);
-  
-  //Container Resize
-  mainContainer.reSize(borderPadding, borderPadding, width-mapW-(borderPadding*3), height-(borderPadding*2));
-  partyContainer.reSize(width-mapW-borderPadding,mapH+(borderPadding*2),mapW,height-mapH-(borderPadding*3));
-  
-  //Button Resize
-}
-
 function mouseOver() {
   cursor(ARROW);
   //Tabs
@@ -207,8 +211,6 @@ function mouseOver() {
   butOnHover(firstButton);
   butOnHover(secondButton);
   //Add butOnHover(button) here to add hover effect.
-  
-  
   
   mapOnHover(mapGlobal);
 }
