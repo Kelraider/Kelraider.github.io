@@ -108,16 +108,24 @@ function overButton(but){
 }
 
 function butOnHover(but){
-  if (overButton(but)){
-    but.isHovered = true;
+  if(but != null){
+    if (overButton(but)){
+      but.isHovered = true;
+    }else{
+      //but.isHovered = false;
+    }
   }else{
-    //but.isHovered = false;
+    return false;
   }
 }
 
 function butOnClick(but){
-  if(!but.disabled & !but.isHidden){
-    return overButton(but);
+  if(but != null){
+    if(!but.disabled & !but.isHidden){
+      return overButton(but);
+    }else{
+      return false;
+    }
   }else{
     return false;
   }

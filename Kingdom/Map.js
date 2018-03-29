@@ -1,9 +1,10 @@
-function Area(name, x, y) {
+function Area(name, x, y, iconSize) {
   this.name = name;
   this.pos = createVector(x, y);
-  this.iconSize = 100;
+  this.iconSize = iconSize;
   this.icon = new Button(x, y, this.iconSize, this.iconSize);
-  this.icon.normalColor = color(0, 255, 0, 10);
+  this.icon.normalColor = color(255, 255, 255, 10);
+  this.icon.hoveredColor = color(200, 200, 200, 100);
 }
 
 Area.prototype.display = function(x, y, iconSize) {
@@ -11,16 +12,16 @@ Area.prototype.display = function(x, y, iconSize) {
   this.icon.displayLoc(x, y, iconSize, iconSize);
 }
 
-function Town(name, x, y) {
-  Area.call(this, name, x, y);
+function Town(name, x, y, iconSize) {
+  Area.call(this, name, x, y, iconSize);
 }
 
 Town.prototype = Object.create(Area.prototype);
 Town.prototype.constructor = Area;
 Town.prototype.isTown = true;
 
-function Dungeon(name, x, y) {
-  Area.call(this, name, x, y);
+function Dungeon(name, x, y, iconSize) {
+  Area.call(this, name, x, y, iconSize);
 }
 
 Dungeon.prototype = Object.create(Area.prototype);
@@ -62,7 +63,7 @@ Map.prototype.display = function() {
   if(!this.scaleMode){
     image(this.map, this.x-this.currentX, this.y-this.currentY);
   }else{
-    image(this.map, this.x-this.currentX, this.y-this.currentY,this.w,this.h);
+    image(this.map, this.x-this.currentX, this.y-this.currentY, this.map.width/4, this.map.height/4);
   }
 
   //Areas Drawn
@@ -116,8 +117,8 @@ Map.prototype.reSize = function(x,y,w,h){
   if(this.currentY < 0){
     this.currentY = 0;
   }
-  if(this.currentY+this.h > this.map.height){
-    this.currentY = this.map.height-this.h;
+  if(this.currentX+this.w > this.map.width){
+    this.currentX = this.map.width-this.w;
   }
   if(this.currentY+this.h > this.map.height){
     this.currentY = this.map.height-this.h;

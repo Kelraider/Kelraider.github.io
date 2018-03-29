@@ -15,15 +15,11 @@ var mainTab2;
 var mainTab3;
 var mainTab4;
 var mainTab5;
-
-//Buttons
-var firstButton;
-var secondButton;
-var firstTextBox;
   
-  //Maps
-    //Preload Images
+//Maps
+  //Preload Images
 var mapGlobalImg;
+var mapGlobalSneakImg;
 var mapGlobal;
 
   //Areas
@@ -40,21 +36,25 @@ var player;
 //Parties
 var party1;
 
+//Scene Management
+var currentScene = null;
+var previousScene = null;
+
 function preload(){
-  mapGlobalImg = loadImage("assets/mapTest.png");
+  mapGlobalImg = loadImage("assets/MapRegionSneak.png");
+  mapGlobalSneakImg = loadImage("assets/MapSneak.png");
 }
 
 function setup() {
-  //TODO Auto Re-size
-  
   borderPadding = 8;
   
-  //
+  //Setup Canvas
   createCanvas(window.innerWidth, window.innerHeight);
   bgCol = color(230, 230, 230)
   background(bgCol);
   
   //Define mapH and mapW;
+  //mapW = width*5/12;
   mapW = width/3;
   mapH = height/2;
   
@@ -86,9 +86,7 @@ function setup() {
   mainContainer.activeTab = mainContainer.tabs[0];
   
   //Setup UI elements
-  setupTextBoxes();
-  setupButtons();
-  firstTextBox.sizeW = firstButton.sizeW + secondButton.sizeW + 30;
+  
   
   //Unit and Player Creation
   firstUnit = new Unit("Dany");
@@ -103,21 +101,18 @@ function setup() {
   mapGlobal = new Map(mapGlobalImg,width-mapW-borderPadding,borderPadding,mapW,mapH,bgCol,borderPadding);
   setupAreas(mapGlobal);
   
+  SetupScenes();
+  
+  
 }
 
 function draw() {
-  
+  //mouseOver() must be called first.
   mouseOver();
-  //Draw Three Main Boxes
-  //Map Display
-  mapGlobal.display();
-  //Container Display
-  mainContainer.display();
-  //Party Display
-  partyContainer.display();
+
+  loadScene(tutorialScene);
   
-  strokeWeight(1);
-  
+  currentScene.display();
 }
 
 function windowResized(){
@@ -178,16 +173,19 @@ function mousePressed() {
   }
   
   //Map Code, Insert State Wrapper Here too maybe
-  if (butOnClick(area1.icon)) {
-    //do something
-    console.log("Working!");
-  }
+  if (mapGlobal!=null){
+    if (butOnClick(area1.icon)) {
+      //do something
+      console.log("Changing Map.");
+      mapGlobal = new Map(mapGlobalSneakImg,width-mapW-borderPadding,borderPadding,mapW,mapH,bgCol,borderPadding);
+      mapGlobal.scaleMode = true;
+    }
   
-  if(overMap(mapGlobal)){
-    mapGlobal.pastMouseX = mouseX;
-    mapGlobal.pastMouseY = mouseY;
+    if(overMap(mapGlobal)){
+      mapGlobal.pastMouseX = mouseX;
+      mapGlobal.pastMouseY = mouseY;
+    }
   }
-  
   
   return false;
 }
@@ -198,50 +196,27 @@ function mouseDragged(){
   }
 }
 
+//Checks to determine if object is moused over.
 function mouseOver() {
   cursor(ARROW);
-  //Tabs
+  //Tabs  
   butOnHover(mainTab1);
   butOnHover(mainTab2);
   butOnHover(mainTab3);
   butOnHover(mainTab4);
   butOnHover(mainTab5);
   
-  
-  butOnHover(firstButton);
-  butOnHover(secondButton);
-  //Add butOnHover(button) here to add hover effect.
+  if (currentScene != null){
+    currentScene.mouseOver();
+  }
   
   mapOnHover(mapGlobal);
 }
 
-function setupButtons() {
-  
-  //MainContainer Buttons
-  firstButton = new Button(200, 200, 0, 30);
-  firstButton.setText("I'm not ready for that yet.");
-  
-  secondButton = new Button(0, 0, 0, 30);
-  secondButton.pos = createVector(firstButton.pos.x+firstButton.sizeW+30, firstButton.pos.y);
-  secondButton.setText("OK.");
-  
-  mainContainer.add(firstButton);
-  mainContainer.add(secondButton);
-  
-  //PartyContainer Buttons
-}
-
-function setupTextBoxes() {
-  firstTextBox = new TextBox(200, 100, 250, 80);
-  firstTextBox.setText("Are you ready to begin your super epic adventure?");
-  
-  mainContainer.tabs[1].add(firstTextBox);
-}
-
 function setupAreas(map) {
-  area1 = new Area("testing123",0,0);
-  area2 = new Town("wowlmao",100,100);
-  area3 = new Dungeon("ohnoaspookyghost",200,200);
+  area1 = new Area("testing123",200,150,20);
+  area2 = new Town("wowlmao",100,100,20);
+  area3 = new Dungeon("ohnoaspookyghost",200,200,20);
   
   map.areas.push(area1);
   map.areas.push(area2);
