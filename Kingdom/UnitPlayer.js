@@ -56,7 +56,7 @@ Unit.prototype.display = function(x, y, w, h) {
   textAlign(LEFT);
   
   //Background
-  fill(230);
+  fill(33);
   rect(x, y, w, h);
   
   stroke(0);

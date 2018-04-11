@@ -24,8 +24,8 @@ Container.prototype.display = function() {
 
 Container.prototype.displayBorder = function() {
   strokeWeight(2);
-  stroke(0);
-  fill(255);
+  stroke(255);
+  fill(33);
   rect(this.x, this.y, this.w, this.h);
 }
 
@@ -42,24 +42,20 @@ Container.prototype.setActiveTab = function(tab) {
     if (this.tabs[i] != this.activeTab) {
       //Set INACTIVE Tabs component InActive
       for (j=0; j<this.tabs[i].objs.length; j++) {
-        
+
         //Disable Buttons
         if (this.tabs[i].objs[j].isButton) {
           this.tabs[i].objs[j].isHidden = true;
         }
-        
-        
       }
     } else {
       //Set ACTIVE Tabs component Active
       for (j=0; j<this.tabs[i].objs.length; j++) {
-        
-        
+
+
         if (this.tabs[i].objs[j].isButton) {
           this.tabs[i].objs[j].isHidden = false;
         }
-        
-        
       }
     }
   }
@@ -73,14 +69,23 @@ Container.prototype.reSize = function(x, y, w, h) {
 }
 
 Container.prototype.displayActiveTab = function() {
-  for (i=0; i<this.activeTab.objs.length; i++) {
-    this.activeTab.objs[i].display();
+
+  if (this.activeTab.isPartyTab) {
+    //Display Party
+    if (this.party != null) {
+      this.party.display(this.x, this.y+this.h/20, this.w, this.h-this.h/20);
+    } else {
+      console.warn("Tried to display null party.");
+    }
+  } else {
+    for (i=0; i<this.activeTab.objs.length; i++) {
+      this.activeTab.objs[i].display();
+    }
   }
 }
 
 function PartyContainer(x, y, w, h) {
   Container.call(this, x, y, w, h);
-
   this.party = null;
 }
 
@@ -91,9 +96,13 @@ PartyContainer.prototype.isPartyContainer = true;
 PartyContainer.prototype.display = function() { 
   this.displayBorder();
 
-  if (this.party != null) {
-    this.party.display(this.x, this.y, this.w, this.h);
-  } else {
-    console.warn("Tried to display null party.");
+  
+
+  //Display Active Tab's Objects
+  this.displayActiveTab();
+  
+  //Display all Tabs
+  for (i=0; i<this.tabs.length; i++) {
+    this.tabs[i].display();
   }
 }
