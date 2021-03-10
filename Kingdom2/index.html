@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="scroll.css">
+<script src="game.js"></script>
 
 <head>
     <title>Kingdom</title>
@@ -10,27 +12,39 @@
     <div class="main-container">
         <div id="main-box-grid">
             <div id="header-area-grid">
-                <a class="main-box-header-item" href="javascript:void(0);">World</a>
-                <a class="main-box-header-item" href="javascript:void(0);">Equipment</a>
-                <a class="main-box-header-item" href="javascript:void(0);">Journal</a>
-                <a class="main-box-header-item" href="javascript:void(0);">Kingdom</a>
-                <a class="main-box-header-item" href="javascript:void(0);">Config</a>
+                <a id="main-box-header-world-btn" class="main-box-header-item" href="javascript:void(0);" onclick="HeaderClick('World');">World</a>
+                <a id="main-box-header-equipment-btn" class="main-box-header-item" href="javascript:void(0);" onclick="HeaderClick('Equipment');">Equipment</a>
+                <a id="main-box-header-journal-btn" class="main-box-header-item" href="javascript:void(0);">Journal</a>
+                <a id="main-box-header-kingdom-btn" class="main-box-header-item" href="javascript:void(0);">Kingdom</a>
+                <a id="main-box-header-config-btn" class="main-box-header-item" href="javascript:void(0);">Config</a>
             </div>
-            <div id="text-area-item">
+            <div id="text-area-item" class="scroll">
                 <div style="text-align: center;">Hythe</div><br>Once a noble kingdom in its own right, the years have been cruel to the people of Hythe. For ten years, Prince Asteron has mourned the loss of his father while around him the rot has grown deeper. Slowly but surely, by debt
                 or by conquest, the rich farmlands that once fed the people have been lost. All the while, the crown has stood by, oblivious to the needs of its citizens.<br><br>No one dares speak out against the prince for fear of execution but many
-                feel his days in power may well be numbered. Rumours spread like wildfire, whispers from the west. The barbarian armies of the Gazsha have been sighted in the valley, pillaging and burning as they go. Some flee by the city by night and
-                for many it's only a matter of time...</div>
+                feel his days in power may well be numbered. Rumours spread like wildfire, whispers from the west. The barbarian armies of the Gazsha have been sighted in the valley, pillaging and burning as they go. Some flee the city by night and for
+                many it's only a matter of time...<br><br>
+                <div style="text-align: center;">Hythe</div><br>Once a noble kingdom in its own right, the years have been cruel to the people of Hythe. For ten years, Prince Asteron has mourned the loss of his father while around him the rot has grown deeper. Slowly but surely, by debt
+                or by conquest, the rich farmlands that once fed the people have been lost. All the while, the crown has stood by, oblivious to the needs of its citizens.<br><br>No one dares speak out against the prince for fear of execution but many
+                feel his days in power may well be numbered. Rumours spread like wildfire, whispers from the west. The barbarian armies of the Gazsha have been sighted in the valley, pillaging and burning as they go. Some flee the city by night and for
+                many it's only a matter of time...<br><br>
+                <div style="text-align: center;">Hythe</div><br>Once a noble kingdom in its own right, the years have been cruel to the people of Hythe. For ten years, Prince Asteron has mourned the loss of his father while around him the rot has grown deeper. Slowly but surely, by debt
+                or by conquest, the rich farmlands that once fed the people have been lost. All the while, the crown has stood by, oblivious to the needs of its citizens.<br><br>No one dares speak out against the prince for fear of execution but many
+                feel his days in power may well be numbered. Rumours spread like wildfire, whispers from the west. The barbarian armies of the Gazsha have been sighted in the valley, pillaging and burning as they go. Some flee the city by night and for
+                many it's only a matter of time...<br><br></div>
             <div id="option-area-grid">
                 <a class="option-area-item" href="javascript:void(0);">Sorry that's all for now</a>
                 <a class="option-area-item" href="javascript:void(0);">Sorry that's all for now</a>
                 <a class="option-area-item" href="javascript:void(0);">Sorry that's all for now</a>
                 <a class="option-area-item" href="javascript:void(0);">Sorry that's all for now</a>
             </div>
+            <div id="inventory-area-grid" class="hidden">Inventory</div>
+            <div id="journal-area-grid" class="hidden">Journal</div>
+            <div id="kingdom-area-grid" class="hidden">Kingdom</div>
         </div>
 
         <div id="map-box-item">Map</div>
         <div id="party-box-item">Party</div>
+        <div id="equipment-area-grid" class="hidden">Equipment</div>
     </div>
 
 
