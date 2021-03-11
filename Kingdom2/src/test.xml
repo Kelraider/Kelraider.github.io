@@ -1,0 +1,16 @@
+<Pages>
+	<Page Name="test">
+		<controls>
+			<test>
+				this is a test.
+			</test>
+		</controls>
+	</Page>
+	<Page Name="User">
+		<controls>
+			<name>
+				Sunil
+			</name>
+		</controls>
+	</Page>
+</Pages>

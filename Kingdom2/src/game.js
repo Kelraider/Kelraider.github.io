@@ -58,3 +58,24 @@ function HideAllHeaderSelected() {
     kingdomHeader.classList.remove('main-box-header-item-selected');
     configHeader.classList.remove('main-box-header-item-selected');
 }
+
+class Dialogue {
+    constructor(filename) {
+        this.filename = filename
+    }
+
+    play() {
+        var mydata = JSON.parse(data);
+    }
+}
+
+function ClearTextArea() {
+    var textBox = document.getElementById("text-area-item");
+    textBox.innerText = "";
+}
+
+function runTestDialogue() {
+    ClearTextArea()
+    var dialogue = Dialogue("testjson.json")
+    dialogue.play()
+}

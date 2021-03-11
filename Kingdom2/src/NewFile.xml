@@ -1,0 +1,91 @@
+<nodes>
+	<node>
+		<title>1.N</title>
+		<tags></tags>
+		<body>As the morning sun pries you from your slumber, you lie in bed a while,letting the light of a new day wash over you.
+
+[[2.N]]
+</body>
+		<position x="862" y="402"></position>
+		<colorID>0</colorID>
+	</node>
+	<node>
+		<title>2.N</title>
+		<tags>Firework Picture-Left Test Test2 Test3</tags>
+		<body>From downstairs you hear the sound of your parents speaking in hushed voices and while you're not sure what they're saying you have a strong sense that it can't be good.
+Looking around your room you see your brother's bed is empty.
+[i]Strange[/i], you think, as you ponder the empty mattress. [i]Since when did Kasta rise early?[/i]
+
+[[3.N]]</body>
+		<position x="861" y="656"></position>
+		<colorID>0</colorID>
+	</node>
+	<node>
+		<title>Key</title>
+		<tags></tags>
+		<body>N = Narration
+S = Speech
+SS= Speech Selection
+</body>
+		<position x="856" y="95"></position>
+		<colorID>0</colorID>
+	</node>
+	<node>
+		<title>3.N</title>
+		<tags></tags>
+		<body>You dress and as you head downstairs your parents suddenly stop talking altogether. They turn to look at you and you can't help but notice that their smiles look a little forced.
+
+[[5. SS]][[6.SS]][[7.SS]]
+</body>
+		<position x="863" y="894"></position>
+		<colorID>0</colorID>
+	</node>
+	<node>
+		<title>5. SS</title>
+		<tags></tags>
+		<body>Good Morning[[8.S]]
+</body>
+		<position x="586" y="1218"></position>
+		<colorID>0</colorID>
+	</node>
+	<node>
+		<title>6.SS</title>
+		<tags></tags>
+		<body>Where's Kasta?[[9.N]]
+</body>
+		<position x="861" y="1223"></position>
+		<colorID>0</colorID>
+	</node>
+	<node>
+		<title>7.SS</title>
+		<tags></tags>
+		<body>What's for breakfast?[[10.S]]
+</body>
+		<position x="1156" y="1225"></position>
+		<colorID>0</colorID>
+	</node>
+	<node>
+		<title>8.S</title>
+		<tags></tags>
+		<body>Mother: Hey! Someone's up early! Did you sleep okay?
+</body>
+		<position x="587" y="1496"></position>
+		<colorID>0</colorID>
+	</node>
+	<node>
+		<title>9.N</title>
+		<tags></tags>
+		<body>In a moment, your parents smiles are gone. They look worried, more worried than you've ever seen them.
+</body>
+		<position x="867" y="1496"></position>
+		<colorID>0</colorID>
+	</node>
+	<node>
+		<title>10.S</title>
+		<tags></tags>
+		<body>Mother: On a plate up at the castle I imagine. Get your own breakfast lazy!
+</body>
+		<position x="1162" y="1505"></position>
+		<colorID>0</colorID>
+	</node>
+</nodes>
